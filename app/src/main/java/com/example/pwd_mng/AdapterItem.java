@@ -1,12 +1,14 @@
 package com.example.pwd_mng;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
@@ -33,6 +35,15 @@ public class AdapterItem extends RecyclerView.Adapter<AdapterItem.ViewHolderItem
     @Override
     public void onBindViewHolder(@NonNull AdapterItem.ViewHolderItem holder, int position) {
         holder.asignarDatos(listDatos.get(position));
+
+        holder.cardView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(context, ItemView.class);
+                intent.putExtra("id", holder.id);
+                context.startActivity(intent);
+            }
+        });
     }
 
     @Override
@@ -42,11 +53,14 @@ public class AdapterItem extends RecyclerView.Adapter<AdapterItem.ViewHolderItem
 
     public class ViewHolderItem extends RecyclerView.ViewHolder {
 
+        CardView cardView;
         TextView nombre, user;
+        int id;
 
         public ViewHolderItem(@NonNull View itemView) {
             super(itemView);
 
+            cardView = itemView.findViewById(R.id.cardItem);
             nombre = itemView.findViewById(R.id.nombreItem);
             user = itemView.findViewById(R.id.nombreUser);
         }
@@ -55,6 +69,7 @@ public class AdapterItem extends RecyclerView.Adapter<AdapterItem.ViewHolderItem
 
             nombre.setText(item.getNombre());
             user.setText(item.getUser());
+            id = item.getId();
 
         }
     }

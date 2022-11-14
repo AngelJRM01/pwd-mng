@@ -23,7 +23,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
 
-        dbHelper = new ItemDbHelper(getApplicationContext(), "pwd-mng4.db");
+        dbHelper = new ItemDbHelper(getApplicationContext(), "aaaaaaabbaaaaaaa.db");
         db = dbHelper.getWritableDatabase();
 
         initItem();
@@ -49,10 +49,12 @@ public class MainActivity extends AppCompatActivity {
                 ItemContract.ItemEntry.COLUMN_NAME_Username
         };
         Cursor cursor = db.query(ItemContract.ItemEntry.TABLE_NAME, columns, null, null, null, null, null);
-
         try {
             while (cursor.moveToNext()) {
-                ListItem listItem = new ListItem(cursor.getString(cursor.getColumnIndex(ItemContract.ItemEntry.COLUMN_NAME_Name)), cursor.getString(cursor.getColumnIndex(ItemContract.ItemEntry.COLUMN_NAME_Username)));
+                ListItem listItem = new ListItem(
+                        cursor.getInt(cursor.getColumnIndex(ItemContract.ItemEntry._ID)) ,
+                        cursor.getString(cursor.getColumnIndex(ItemContract.ItemEntry.COLUMN_NAME_Name)),
+                        cursor.getString(cursor.getColumnIndex(ItemContract.ItemEntry.COLUMN_NAME_Username)));
                 listDatos.add(listItem);
             }
         } finally {
@@ -68,26 +70,29 @@ public class MainActivity extends AppCompatActivity {
         values.put(ItemContract.ItemEntry.COLUMN_NAME_Username, "prueba@gmail.com");
         values.put(ItemContract.ItemEntry.COLUMN_NAME_Password, "123");
         values.put(ItemContract.ItemEntry.COLUMN_NAME_Link, "amazon.com");
-        values.put(ItemContract.ItemEntry.COLUMN_NAME_Favorite, 1);
-        values.put(ItemContract.ItemEntry.COLUMN_NAME_Notes, "Importante");
+        values.put(ItemContract.ItemEntry.COLUMN_NAME_Favorite, 0);
+        values.put(ItemContract.ItemEntry.COLUMN_NAME_Notes, "Importantesdaaaaaaaaaaaaaaaaaaaaaaaaaaadsaaaaaaaaaaaaaaaa");
         db.insert(ItemContract.ItemEntry.TABLE_NAME, null, values);
 
+        values = new ContentValues();
         values.put(ItemContract.ItemEntry.COLUMN_NAME_Name, "Instagram");
         values.put(ItemContract.ItemEntry.COLUMN_NAME_Username, "prueba@gmail.com");
         values.put(ItemContract.ItemEntry.COLUMN_NAME_Password, "123456");
         values.put(ItemContract.ItemEntry.COLUMN_NAME_Link, "instagram.com");
         values.put(ItemContract.ItemEntry.COLUMN_NAME_Favorite, 1);
-        values.put(ItemContract.ItemEntry.COLUMN_NAME_Notes, "Importante");
+        values.put(ItemContract.ItemEntry.COLUMN_NAME_Notes, "Importante Importante Importante Importante Importante Importante Importante Importante Importante Importante");
         db.insert(ItemContract.ItemEntry.TABLE_NAME, null, values);
 
+        values = new ContentValues();
         values.put(ItemContract.ItemEntry.COLUMN_NAME_Name, "Github");
         values.put(ItemContract.ItemEntry.COLUMN_NAME_Username, "prueba@gmail.com");
         values.put(ItemContract.ItemEntry.COLUMN_NAME_Password, "12eweweqw3");
         values.put(ItemContract.ItemEntry.COLUMN_NAME_Link, "github.com");
-        values.put(ItemContract.ItemEntry.COLUMN_NAME_Favorite, 1);
+        values.put(ItemContract.ItemEntry.COLUMN_NAME_Favorite, 0);
         values.put(ItemContract.ItemEntry.COLUMN_NAME_Notes, "Importante");
         db.insert(ItemContract.ItemEntry.TABLE_NAME, null, values);
 
+        values = new ContentValues();
         values.put(ItemContract.ItemEntry.COLUMN_NAME_Name, "Discord");
         values.put(ItemContract.ItemEntry.COLUMN_NAME_Username, "prueba@gmail.com");
         values.put(ItemContract.ItemEntry.COLUMN_NAME_Password, "1212212122");
@@ -95,11 +100,5 @@ public class MainActivity extends AppCompatActivity {
         values.put(ItemContract.ItemEntry.COLUMN_NAME_Favorite, 1);
         values.put(ItemContract.ItemEntry.COLUMN_NAME_Notes, "Importante");
         db.insert(ItemContract.ItemEntry.TABLE_NAME, null, values);
-    }
-
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        db.close();
     }
 }

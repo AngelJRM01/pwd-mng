@@ -1,0 +1,91 @@
+package com.example.pwd_mng;
+
+import androidx.appcompat.app.AppCompatActivity;
+
+import android.content.Intent;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
+import android.net.Uri;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.TextView;
+
+public class ItemView extends AppCompatActivity {
+
+    TextView nombrePass, userPass, linkPass;
+    EditText pass, notesPass;
+    ImageView favouritePass;
+    private ItemDbHelper dbHelper;
+    private SQLiteDatabase db;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_item_view);
+
+        dbHelper = new ItemDbHelper(getApplicationContext(), "pwd-mng4.db");
+        db = dbHelper.getWritableDatabase();
+
+        nombrePass = findViewById(R.id.nombrePassItemView);
+        userPass = findViewById(R.id.userPassItemView);
+        pass = findViewById(R.id.passItemView);
+        linkPass = findViewById(R.id.linkItemView);
+        notesPass = findViewById(R.id.notesItemView);
+        favouritePass = findViewById(R.id.favouriteItemView);
+
+
+        int id = getIntent().getIntExtra("id",0);
+
+        String[] columns = {
+                ItemContract.ItemEntry._ID,
+                ItemContract.ItemEntry.COLUMN_NAME_Name,
+                ItemContract.ItemEntry.COLUMN_NAME_Username,
+                ItemContract.ItemEntry.COLUMN_NAME_Password,
+                ItemContract.ItemEntry.COLUMN_NAME_Favorite,
+                ItemContract.ItemEntry.COLUMN_NAME_Link,
+                ItemContract.ItemEntry.COLUMN_NAME_Notes
+        };
+        String where = ItemContract.ItemEntry._ID + " = ?";
+        String[] whereArgs = { id+"" };
+        Cursor cursor = db.query(ItemContract.ItemEntry.TABLE_NAME, columns, where, whereArgs, null, null, null);
+
+        try {
+            while (cursor.moveToNext()) {
+                ListItem listItem = new ListItem(
+                        cursor.getInt(cursor.getColumnIndex(ItemContract.ItemEntry._ID)) ,
+                        cursor.getString(cursor.getColumnIndex(ItemContract.ItemEntry.COLUMN_NAME_Name)),
+                        cursor.getString(cursor.getColumnIndex(ItemContract.ItemEntry.COLUMN_NAME_Username)),
+                        cursor.getString(cursor.getColumnIndex(ItemContract.ItemEntry.COLUMN_NAME_Password)),
+                        Boolean.getBoolean(cursor.getString(cursor.getColumnIndex(ItemContract.ItemEntry.COLUMN_NAME_Favorite))),
+                        cursor.getString(cursor.getColumnIndex(ItemContract.ItemEntry.COLUMN_NAME_Link)),
+                        cursor.getString(cursor.getColumnIndex(ItemContract.ItemEntry.COLUMN_NAME_Notes)));
+                nombrePass.setText(listItem.getNombre());
+                userPass.setText(listItem.getUser());
+                pass.setText(listItem.getPass());
+                linkPass.setText(listItem.getLink());
+                notesPass.setText(listItem.getNotes());
+
+                linkPass.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        Uri uri = Uri.parse(listItem.getLink());
+                        Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+                        startActivity(intent);
+                    }
+                });
+
+                if(!listItem.getFavourite()){
+                    favouritePass.setImageResource(R.drawable.star_empty);
+                } else {
+                    favouritePass.setImageResource(R.drawable.star_full);
+                }
+
+            }
+        } finally {
+            cursor.close();
+        }
+
+    }
+}
