@@ -2,9 +2,11 @@ package com.example.pwd_mng;
 
 import android.content.Context;
 import android.content.Intent;
+import android.database.sqlite.SQLiteDatabase;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -55,6 +57,7 @@ public class AdapterItem extends RecyclerView.Adapter<AdapterItem.ViewHolderItem
 
         CardView cardView;
         TextView nombre, user;
+        ImageView favorite;
         int id;
 
         public ViewHolderItem(@NonNull View itemView) {
@@ -63,6 +66,8 @@ public class AdapterItem extends RecyclerView.Adapter<AdapterItem.ViewHolderItem
             cardView = itemView.findViewById(R.id.cardItem);
             nombre = itemView.findViewById(R.id.nombreItem);
             user = itemView.findViewById(R.id.nombreUser);
+            favorite = itemView.findViewById(R.id.favouriteItem);
+
         }
 
         public void asignarDatos(ListItem item) {
@@ -70,6 +75,9 @@ public class AdapterItem extends RecyclerView.Adapter<AdapterItem.ViewHolderItem
             nombre.setText(item.getNombre());
             user.setText(item.getUser());
             id = item.getId();
+            if(item.getFavourite()){
+                favorite.setImageResource(R.drawable.star_full);
+            }
 
         }
     }

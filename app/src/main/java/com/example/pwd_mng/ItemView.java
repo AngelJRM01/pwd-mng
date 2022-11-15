@@ -25,7 +25,7 @@ public class ItemView extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_item_view);
 
-        dbHelper = new ItemDbHelper(getApplicationContext(), "pwd-mng4.db");
+        dbHelper = new ItemDbHelper(getApplicationContext(), "aaaasdaaabbaaaaaaa.db");
         db = dbHelper.getWritableDatabase();
 
         nombrePass = findViewById(R.id.nombrePassItemView);
@@ -34,6 +34,8 @@ public class ItemView extends AppCompatActivity {
         linkPass = findViewById(R.id.linkItemView);
         notesPass = findViewById(R.id.notesItemView);
         favouritePass = findViewById(R.id.favouriteItemView);
+
+
 
 
         int id = getIntent().getIntExtra("id",0);
@@ -61,11 +63,16 @@ public class ItemView extends AppCompatActivity {
                         Boolean.getBoolean(cursor.getString(cursor.getColumnIndex(ItemContract.ItemEntry.COLUMN_NAME_Favorite))),
                         cursor.getString(cursor.getColumnIndex(ItemContract.ItemEntry.COLUMN_NAME_Link)),
                         cursor.getString(cursor.getColumnIndex(ItemContract.ItemEntry.COLUMN_NAME_Notes)));
+
+                listItem.setFavourite(cursor.getInt(cursor.getColumnIndex(ItemContract.ItemEntry.COLUMN_NAME_Favorite)) == 1);
+
                 nombrePass.setText(listItem.getNombre());
                 userPass.setText(listItem.getUser());
                 pass.setText(listItem.getPass());
                 linkPass.setText(listItem.getLink());
                 notesPass.setText(listItem.getNotes());
+
+                System.out.println(listItem.getFavourite());
 
                 linkPass.setOnClickListener(new View.OnClickListener() {
                     @Override

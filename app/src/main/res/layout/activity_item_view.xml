@@ -117,12 +117,11 @@
             android:id="@+id/passItemView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/white"
+            android:background="@android:color/transparent"
             android:ems="10"
             android:focusable="false"
             android:inputType="textPassword"
-            android:textColor="#000000"
-            app:endIconMode="password_toggle" />
+            app:endIconMode="password_toggle"/>
     </com.google.android.material.textfield.TextInputLayout>
 
     <ImageView
