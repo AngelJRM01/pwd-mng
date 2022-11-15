@@ -4,4 +4,9 @@
     <string name="password">Password:</string>
     <string name="favourite">Favourite</string>
     <string name="link">Link:</string>
+    <string name="name">Name:</string>
+    <string name="username">Username:</string>
+    <string name="notes">Notes:</string>
+    <string name="create_new_item">Create new item</string>
+    <string name="create">Create</string>
 </resources>
