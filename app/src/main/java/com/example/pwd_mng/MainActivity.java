@@ -4,10 +4,14 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.annotation.SuppressLint;
 import android.content.ContentValues;
+import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 
@@ -26,7 +30,7 @@ public class MainActivity extends AppCompatActivity {
         dbHelper = new ItemDbHelper(getApplicationContext(), "aaaasdaaabbaaaaaaa.db");
         db = dbHelper.getWritableDatabase();
 
-        initItem();
+        //initItem();
 
         listDatos = new ArrayList<>();
 
@@ -42,6 +46,7 @@ public class MainActivity extends AppCompatActivity {
 
     private SQLiteDatabase db;
 
+    @SuppressLint("Range")
     private void buscarItems(){
         String[] columns = {
                 ItemContract.ItemEntry._ID,
@@ -104,5 +109,14 @@ public class MainActivity extends AppCompatActivity {
         values.put(ItemContract.ItemEntry.COLUMN_NAME_Favorite, 1);
         values.put(ItemContract.ItemEntry.COLUMN_NAME_Notes, "Importanteewewew");
         db.insert(ItemContract.ItemEntry.TABLE_NAME, null, values);
+    }
+
+    public void changeActivityToAdd(View view){
+        TextView text = (TextView) findViewById(R.id.textView);
+        text.setText("Button clicked");
+
+        Intent intent = new Intent(this, CreateItemActivity.class);
+
+        this.startActivity(intent);
     }
 }

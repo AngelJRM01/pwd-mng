@@ -2,6 +2,7 @@ package com.example.pwd_mng;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -20,6 +21,7 @@ public class ItemView extends AppCompatActivity {
     private ItemDbHelper dbHelper;
     private SQLiteDatabase db;
 
+    @SuppressLint("Range")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
