@@ -1,6 +1,6 @@
 package com.example.pwd_mng;
 
-public class ListItem {
+public class Item {
     private int id;
     private String nombre;
     private String user;
@@ -9,17 +9,15 @@ public class ListItem {
     private String link;
     private String notes;
 
-    public ListItem(){
+    public Item(){}
 
-    }
-
-    public ListItem(int id, String nombre, String user) {
+    public Item(int id, String nombre, String user) {
         this.id = id;
         this.nombre = nombre;
         this.user = user;
     }
 
-    public ListItem(int id, String nombre, String user, String pass, Boolean favourite, String link, String notes) {
+    public Item(int id, String nombre, String user, String pass, Boolean favourite, String link, String notes) {
         this.id = id;
         this.nombre = nombre;
         this.user = user;

@@ -2,7 +2,6 @@ package com.example.pwd_mng;
 
 import android.content.Context;
 import android.content.Intent;
-import android.database.sqlite.SQLiteDatabase;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,11 +16,11 @@ import java.util.ArrayList;
 
 public class AdapterItem extends RecyclerView.Adapter<AdapterItem.ViewHolderItem> {
 
-    private ArrayList<ListItem> listDatos;
+    private ArrayList<Item> listDatos;
     private Context context;
     private LayoutInflater inflater;
 
-    public AdapterItem(ArrayList<ListItem> listDatos, Context context) {
+    public AdapterItem(ArrayList<Item> listDatos, Context context) {
         this.listDatos = listDatos;
         this.context = context;
         this.inflater = LayoutInflater.from(context);
@@ -41,7 +40,7 @@ public class AdapterItem extends RecyclerView.Adapter<AdapterItem.ViewHolderItem
         holder.cardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(context, ItemView.class);
+                Intent intent = new Intent(context, ItemViewActivity.class);
                 intent.putExtra("id", holder.id);
                 context.startActivity(intent);
             }
@@ -70,7 +69,7 @@ public class AdapterItem extends RecyclerView.Adapter<AdapterItem.ViewHolderItem
 
         }
 
-        public void asignarDatos(ListItem item) {
+        public void asignarDatos(Item item) {
 
             nombre.setText(item.getNombre());
             user.setText(item.getUser());

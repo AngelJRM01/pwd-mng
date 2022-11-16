@@ -16,7 +16,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-public class ItemView extends AppCompatActivity {
+public class ItemViewActivity extends AppCompatActivity {
 
     TextView nombrePass, userPass, linkPass;
     EditText pass, notesPass;
@@ -24,7 +24,7 @@ public class ItemView extends AppCompatActivity {
     int itemId;
     private ItemDbHelper dbHelper;
     private SQLiteDatabase db;
-    ListItem listItem;
+    Item item;
     ImageButton home;
 
     @SuppressLint("Range")
@@ -63,7 +63,7 @@ public class ItemView extends AppCompatActivity {
 
         try {
             while (cursor.moveToNext()) {
-                listItem = new ListItem(
+                item = new Item(
                         cursor.getInt(cursor.getColumnIndex(ItemContract.ItemEntry._ID)) ,
                         cursor.getString(cursor.getColumnIndex(ItemContract.ItemEntry.COLUMN_NAME_Name)),
                         cursor.getString(cursor.getColumnIndex(ItemContract.ItemEntry.COLUMN_NAME_Username)),
@@ -72,26 +72,26 @@ public class ItemView extends AppCompatActivity {
                         cursor.getString(cursor.getColumnIndex(ItemContract.ItemEntry.COLUMN_NAME_Link)),
                         cursor.getString(cursor.getColumnIndex(ItemContract.ItemEntry.COLUMN_NAME_Notes)));
 
-                listItem.setFavourite(cursor.getInt(cursor.getColumnIndex(ItemContract.ItemEntry.COLUMN_NAME_Favorite)) == 1);
+                item.setFavourite(cursor.getInt(cursor.getColumnIndex(ItemContract.ItemEntry.COLUMN_NAME_Favorite)) == 1);
 
-                nombrePass.setText(listItem.getNombre());
-                userPass.setText(listItem.getUser());
-                pass.setText(listItem.getPass());
-                linkPass.setText(listItem.getLink());
-                notesPass.setText(listItem.getNotes());
+                nombrePass.setText(item.getNombre());
+                userPass.setText(item.getUser());
+                pass.setText(item.getPass());
+                linkPass.setText(item.getLink());
+                notesPass.setText(item.getNotes());
 
-                System.out.println(listItem.getFavourite());
+                System.out.println(item.getFavourite());
 
                 linkPass.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        Uri uri = Uri.parse(listItem.getLink());
+                        Uri uri = Uri.parse(item.getLink());
                         Intent intent = new Intent(Intent.ACTION_VIEW, uri);
                         startActivity(intent);
                     }
                 });
 
-                if(!listItem.getFavourite()){
+                if(!item.getFavourite()){
                     favouritePass.setImageResource(R.drawable.star_empty);
                 } else {
                     favouritePass.setImageResource(R.drawable.star_full);
@@ -120,12 +120,12 @@ public class ItemView extends AppCompatActivity {
     public void editItem(View view){
         Intent intent = new Intent(this, EditItemActivity.class);
         intent.putExtra("id", itemId);
-        intent.putExtra("nombrePass", listItem.getNombre());
-        intent.putExtra("usuarioPass", listItem.getUser());
-        intent.putExtra("pass", listItem.getPass());
-        intent.putExtra("linkPass", listItem.getLink());
-        intent.putExtra("notasPass", listItem.getNotes());
-        intent.putExtra("favoritoPass", listItem.getFavourite());
+        intent.putExtra("nombrePass", item.getNombre());
+        intent.putExtra("usuarioPass", item.getUser());
+        intent.putExtra("pass", item.getPass());
+        intent.putExtra("linkPass", item.getLink());
+        intent.putExtra("notasPass", item.getNotes());
+        intent.putExtra("favoritoPass", item.getFavourite());
 
         this.startActivity(intent);
     }

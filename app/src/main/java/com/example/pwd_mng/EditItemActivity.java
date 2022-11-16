@@ -5,7 +5,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.pm.ActivityInfo;
 import android.content.ContentValues;
 import android.content.Intent;
-import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.view.View;
@@ -23,7 +22,7 @@ public class EditItemActivity extends AppCompatActivity {
     private Switch switchFavourite;
     private ItemDbHelper dbHelper;
     private SQLiteDatabase db;
-    private ListItem listItem = new ListItem();
+    private Item item = new Item();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,28 +37,25 @@ public class EditItemActivity extends AppCompatActivity {
         textNotes = findViewById(R.id.textNotes);
         switchFavourite = findViewById(R.id.switchFavourite);
 
-        listItem.setNombre(getIntent().getStringExtra("nombrePass"));
-        listItem.setUser(getIntent().getStringExtra("usuarioPass"));
-        listItem.setPass(getIntent().getStringExtra("pass"));
-        listItem.setLink(getIntent().getStringExtra("linkPass"));
-        listItem.setNotes(getIntent().getStringExtra("notasPass"));
-        listItem.setFavourite(getIntent().getBooleanExtra("favoritoPass", false));
-        listItem.setId(getIntent().getIntExtra("id", 0));
+        item.setNombre(getIntent().getStringExtra("nombrePass"));
+        item.setUser(getIntent().getStringExtra("usuarioPass"));
+        item.setPass(getIntent().getStringExtra("pass"));
+        item.setLink(getIntent().getStringExtra("linkPass"));
+        item.setNotes(getIntent().getStringExtra("notasPass"));
+        item.setFavourite(getIntent().getBooleanExtra("favoritoPass", false));
+        item.setId(getIntent().getIntExtra("id", 0));
 
-        textName.setText(listItem.getNombre());
-        textUsername.setText(listItem.getUser());
-        textPassword.setText(listItem.getPass());
-        textLink.setText(listItem.getLink());
-        textNotes.setText(listItem.getNotes());
-        switchFavourite.setChecked(listItem.getFavourite());
+        textName.setText(item.getNombre());
+        textUsername.setText(item.getUser());
+        textPassword.setText(item.getPass());
+        textLink.setText(item.getLink());
+        textNotes.setText(item.getNotes());
+        switchFavourite.setChecked(item.getFavourite());
 
         dbHelper = new ItemDbHelper(getApplicationContext(), "pwd-mng.db");
         db = dbHelper.getWritableDatabase();
 
-
-
     }
-
 
     public void editItem(View view){
 
@@ -77,13 +73,13 @@ public class EditItemActivity extends AppCompatActivity {
             values.put(ItemContract.ItemEntry.COLUMN_NAME_Notes, String.valueOf(textNotes.getText()));
 
             String where = ItemContract.ItemEntry._ID + " = ?";
-            String[] whereArgs = { listItem.getId()+"" };
+            String[] whereArgs = { item.getId()+"" };
             db.update(ItemContract.ItemEntry.TABLE_NAME, values, where, whereArgs);
 
             Toast.makeText(this, R.string.item_edited, Toast.LENGTH_LONG).show();
 
-            Intent intent = new Intent(this, ItemView.class);
-            intent.putExtra("id", listItem.getId());
+            Intent intent = new Intent(this, ItemViewActivity.class);
+            intent.putExtra("id", item.getId());
 
             this.startActivity(intent);
         }
