@@ -30,8 +30,6 @@ public class MainActivity extends AppCompatActivity {
         dbHelper = new ItemDbHelper(getApplicationContext(), "aaaasdaaabbaaaaaaa.db");
         db = dbHelper.getWritableDatabase();
 
-        //initItem();
-
         listDatos = new ArrayList<>();
 
         buscarItems();
@@ -72,7 +70,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-    private void initItem() {
+    /*private void initItem() {
         // Adición de valores a la BD
         ContentValues values = new ContentValues();
         values.put(ItemContract.ItemEntry.COLUMN_NAME_Name, "Amazo1");
@@ -109,7 +107,7 @@ public class MainActivity extends AppCompatActivity {
         values.put(ItemContract.ItemEntry.COLUMN_NAME_Favorite, 1);
         values.put(ItemContract.ItemEntry.COLUMN_NAME_Notes, "Importanteewewew");
         db.insert(ItemContract.ItemEntry.TABLE_NAME, null, values);
-    }
+    }*/
 
     public void changeActivityToCreate(View view){
         Intent intent = new Intent(this, CreateItemActivity.class);

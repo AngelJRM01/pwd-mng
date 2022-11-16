@@ -2,6 +2,9 @@ package com.example.pwd_mng;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.ContentValues;
+import android.content.Intent;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.view.View;
@@ -57,6 +60,30 @@ public class EditItemActivity extends AppCompatActivity {
 
 
     public void editItem(View view){
-        Toast.makeText(this, "R.string.badInput", Toast.LENGTH_LONG).show();
+
+        if(textName.getText().toString().equals("")){
+            Toast.makeText(this, R.string.name_danger, Toast.LENGTH_LONG).show();
+        }else if(!textPassword.getText().toString().equals("") && textPassword.getText().length() < 8){
+            Toast.makeText(this, R.string.password_danger, Toast.LENGTH_LONG).show();
+        }else {
+            ContentValues values = new ContentValues();
+            values.put(ItemContract.ItemEntry.COLUMN_NAME_Name, String.valueOf(textName.getText()));
+            values.put(ItemContract.ItemEntry.COLUMN_NAME_Username, String.valueOf(textUsername.getText()));
+            values.put(ItemContract.ItemEntry.COLUMN_NAME_Password, String.valueOf(textPassword.getText()));
+            values.put(ItemContract.ItemEntry.COLUMN_NAME_Link, String.valueOf(textLink.getText()));
+            values.put(ItemContract.ItemEntry.COLUMN_NAME_Favorite, (switchFavourite.isChecked()) ? 1 : 0);
+            values.put(ItemContract.ItemEntry.COLUMN_NAME_Notes, String.valueOf(textNotes.getText()));
+
+            String where = ItemContract.ItemEntry._ID + " = ?";
+            String[] whereArgs = { listItem.getId()+"" };
+            db.update(ItemContract.ItemEntry.TABLE_NAME, values, where, whereArgs);
+
+            Toast.makeText(this, R.string.item_edited, Toast.LENGTH_LONG).show();
+
+            Intent intent = new Intent(this, MainActivity.class);
+
+            this.startActivity(intent);
+        }
+
     }
 }
