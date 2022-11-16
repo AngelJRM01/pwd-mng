@@ -14,5 +14,5 @@
     <string name="password_danger">Contraseña demasiado corta</string>
     <string name="item_created">Registro creado</string>
     <string name="name_danger">El registro debe tener nombre</string>
-    <string name="item_edited">Registrado editado</string>
+    <string name="item_edited">Registro editado</string>
 </resources>
