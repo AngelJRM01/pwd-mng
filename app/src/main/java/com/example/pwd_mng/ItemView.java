@@ -18,6 +18,7 @@ public class ItemView extends AppCompatActivity {
     TextView nombrePass, userPass, linkPass;
     EditText pass, notesPass;
     ImageView favouritePass;
+    int itemId;
     private ItemDbHelper dbHelper;
     private SQLiteDatabase db;
 
@@ -40,7 +41,7 @@ public class ItemView extends AppCompatActivity {
 
 
 
-        int id = getIntent().getIntExtra("id",0);
+        itemId = getIntent().getIntExtra("id",0);
 
         String[] columns = {
                 ItemContract.ItemEntry._ID,
@@ -52,7 +53,7 @@ public class ItemView extends AppCompatActivity {
                 ItemContract.ItemEntry.COLUMN_NAME_Notes
         };
         String where = ItemContract.ItemEntry._ID + " = ?";
-        String[] whereArgs = { id+"" };
+        String[] whereArgs = { itemId+"" };
         Cursor cursor = db.query(ItemContract.ItemEntry.TABLE_NAME, columns, where, whereArgs, null, null, null);
 
         try {
@@ -96,5 +97,16 @@ public class ItemView extends AppCompatActivity {
             cursor.close();
         }
 
+    }
+
+    public void deleteItem(View view){
+        String where = ItemContract.ItemEntry._ID + " = ?";
+        String[] whereArgs = { itemId+"" };
+
+        db.delete(ItemContract.ItemEntry.TABLE_NAME, where, whereArgs);
+
+        Intent intent = new Intent(this, MainActivity.class);
+
+        this.startActivity(intent);
     }
 }

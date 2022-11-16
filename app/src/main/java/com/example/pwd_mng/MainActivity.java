@@ -111,10 +111,7 @@ public class MainActivity extends AppCompatActivity {
         db.insert(ItemContract.ItemEntry.TABLE_NAME, null, values);
     }
 
-    public void changeActivityToAdd(View view){
-        TextView text = (TextView) findViewById(R.id.textView);
-        text.setText("Button clicked");
-
+    public void changeActivityToCreate(View view){
         Intent intent = new Intent(this, CreateItemActivity.class);
 
         this.startActivity(intent);
