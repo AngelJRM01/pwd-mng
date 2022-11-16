@@ -9,6 +9,10 @@ public class ListItem {
     private String link;
     private String notes;
 
+    public ListItem(){
+
+    }
+
     public ListItem(int id, String nombre, String user) {
         this.id = id;
         this.nombre = nombre;
