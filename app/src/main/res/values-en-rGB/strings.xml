@@ -15,4 +15,5 @@
     <string name="password_danger">Password  too short</string>
     <string name="item_created">Item created</string>
     <string name="name_danger">Item must have a name</string>
+    <string name="item_edited">Item edited</string>
 </resources>
