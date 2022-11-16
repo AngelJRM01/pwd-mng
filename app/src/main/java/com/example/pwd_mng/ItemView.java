@@ -112,4 +112,11 @@ public class ItemView extends AppCompatActivity {
 
         this.startActivity(intent);
     }
+
+    public void editItem(View view){
+        Intent intent = new Intent(this, EditItemActivity.class);
+        intent.putExtra("id", itemId);
+
+        this.startActivity(intent);
+    }
 }
