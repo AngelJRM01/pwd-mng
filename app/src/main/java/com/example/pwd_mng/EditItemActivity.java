@@ -2,6 +2,7 @@ package com.example.pwd_mng;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.pm.ActivityInfo;
 import android.content.ContentValues;
 import android.content.Intent;
 import android.database.Cursor;
@@ -27,6 +28,7 @@ public class EditItemActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         setContentView(R.layout.activity_edit_item);
 
         textName = findViewById(R.id.textName);
@@ -51,7 +53,7 @@ public class EditItemActivity extends AppCompatActivity {
         textNotes.setText(listItem.getNotes());
         switchFavourite.setChecked(listItem.getFavourite());
 
-        dbHelper = new ItemDbHelper(getApplicationContext(), "aaaasdaaabbaaaaaaa.db");
+        dbHelper = new ItemDbHelper(getApplicationContext(), "pwd-mng.db");
         db = dbHelper.getWritableDatabase();
 
 
