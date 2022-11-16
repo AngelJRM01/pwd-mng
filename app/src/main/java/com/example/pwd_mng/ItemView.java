@@ -11,6 +11,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -24,6 +25,7 @@ public class ItemView extends AppCompatActivity {
     private ItemDbHelper dbHelper;
     private SQLiteDatabase db;
     ListItem listItem;
+    ImageButton home;
 
     @SuppressLint("Range")
     @Override
@@ -41,8 +43,7 @@ public class ItemView extends AppCompatActivity {
         linkPass = findViewById(R.id.linkItemView);
         notesPass = findViewById(R.id.notesItemView);
         favouritePass = findViewById(R.id.favouriteItemView);
-
-
+        home = findViewById(R.id.btnHome);
 
 
         itemId = getIntent().getIntExtra("id",0);
@@ -128,4 +129,11 @@ public class ItemView extends AppCompatActivity {
 
         this.startActivity(intent);
     }
+
+    public void backHome(View view){
+        Intent intent = new Intent(this, MainActivity.class);
+
+        startActivity(intent);
+    }
+
 }

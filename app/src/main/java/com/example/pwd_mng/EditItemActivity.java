@@ -82,7 +82,8 @@ public class EditItemActivity extends AppCompatActivity {
 
             Toast.makeText(this, R.string.item_edited, Toast.LENGTH_LONG).show();
 
-            Intent intent = new Intent(this, MainActivity.class);
+            Intent intent = new Intent(this, ItemView.class);
+            intent.putExtra("id", listItem.getId());
 
             this.startActivity(intent);
         }
