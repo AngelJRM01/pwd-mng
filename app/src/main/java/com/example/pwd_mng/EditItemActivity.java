@@ -19,6 +19,7 @@ public class EditItemActivity extends AppCompatActivity {
     private Switch switchFavourite;
     private ItemDbHelper dbHelper;
     private SQLiteDatabase db;
+    private ListItem listItem = new ListItem();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,7 +33,20 @@ public class EditItemActivity extends AppCompatActivity {
         textNotes = findViewById(R.id.textNotes);
         switchFavourite = findViewById(R.id.switchFavourite);
 
+        listItem.setNombre(getIntent().getStringExtra("nombrePass"));
+        listItem.setUser(getIntent().getStringExtra("usuarioPass"));
+        listItem.setPass(getIntent().getStringExtra("pass"));
+        listItem.setLink(getIntent().getStringExtra("linkPass"));
+        listItem.setNotes(getIntent().getStringExtra("notasPass"));
+        listItem.setFavourite(getIntent().getBooleanExtra("favoritoPass", false));
+        listItem.setId(getIntent().getIntExtra("id", 0));
 
+        textName.setText(listItem.getNombre());
+        textUsername.setText(listItem.getUser());
+        textPassword.setText(listItem.getPass());
+        textLink.setText(listItem.getLink());
+        textNotes.setText(listItem.getNotes());
+        switchFavourite.setChecked(listItem.getFavourite());
 
         dbHelper = new ItemDbHelper(getApplicationContext(), "aaaasdaaabbaaaaaaa.db");
         db = dbHelper.getWritableDatabase();

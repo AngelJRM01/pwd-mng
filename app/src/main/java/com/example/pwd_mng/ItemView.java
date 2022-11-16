@@ -22,6 +22,7 @@ public class ItemView extends AppCompatActivity {
     int itemId;
     private ItemDbHelper dbHelper;
     private SQLiteDatabase db;
+    ListItem listItem;
 
     @SuppressLint("Range")
     @Override
@@ -59,7 +60,7 @@ public class ItemView extends AppCompatActivity {
 
         try {
             while (cursor.moveToNext()) {
-                ListItem listItem = new ListItem(
+                listItem = new ListItem(
                         cursor.getInt(cursor.getColumnIndex(ItemContract.ItemEntry._ID)) ,
                         cursor.getString(cursor.getColumnIndex(ItemContract.ItemEntry.COLUMN_NAME_Name)),
                         cursor.getString(cursor.getColumnIndex(ItemContract.ItemEntry.COLUMN_NAME_Username)),
@@ -116,6 +117,12 @@ public class ItemView extends AppCompatActivity {
     public void editItem(View view){
         Intent intent = new Intent(this, EditItemActivity.class);
         intent.putExtra("id", itemId);
+        intent.putExtra("nombrePass", listItem.getNombre());
+        intent.putExtra("usuarioPass", listItem.getUser());
+        intent.putExtra("pass", listItem.getPass());
+        intent.putExtra("linkPass", listItem.getLink());
+        intent.putExtra("notasPass", listItem.getNotes());
+        intent.putExtra("favoritoPass", listItem.getFavourite());
 
         this.startActivity(intent);
     }
