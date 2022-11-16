@@ -11,4 +11,7 @@
     <string name="items">Mis contraseñas</string>
     <string name="edit_item">Editar registro</string>
     <string name="edit">Editar</string>
+    <string name="password_danger">Contraseña demasiado corta</string>
+    <string name="item_created">Registro creado</string>
+    <string name="name_danger">El registro debe tener nombre</string>
 </resources>

@@ -12,4 +12,7 @@
     <string name="items">My passwords</string>
     <string name="edit_item">Edit item</string>
     <string name="edit">Edit</string>
+    <string name="password_danger">Password  too short</string>
+    <string name="item_created">Item created</string>
+    <string name="name_danger">Item must have a name</string>
 </resources>
