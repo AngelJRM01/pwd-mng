@@ -12,6 +12,7 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class ItemView extends AppCompatActivity {
 
@@ -102,6 +103,8 @@ public class ItemView extends AppCompatActivity {
     public void deleteItem(View view){
         String where = ItemContract.ItemEntry._ID + " = ?";
         String[] whereArgs = { itemId+"" };
+
+        Toast.makeText(getApplicationContext(), "Se ha eliminado la contraseña " + nombrePass.getText().toString(), Toast.LENGTH_LONG).show();
 
         db.delete(ItemContract.ItemEntry.TABLE_NAME, where, whereArgs);
 
