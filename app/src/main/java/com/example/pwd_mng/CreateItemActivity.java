@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Switch;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -45,6 +46,12 @@ public class CreateItemActivity extends AppCompatActivity {
         System.out.println(textLink.getText());
         System.out.println(textNotes.getText());
         System.out.println(switchFavourite.isChecked());*/
+
+        if(textName.getText().equals("")){
+            Toast.makeText(this, "R.string.badInput", Toast.LENGTH_LONG).show();
+        }if(!textPassword.getText().equals("") && textPassword.getText().length() < 8){
+            Toast.makeText(this, "R.string.badInput", Toast.LENGTH_LONG).show();
+        }
 
 
         ContentValues values = new ContentValues();

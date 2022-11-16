@@ -10,4 +10,6 @@
     <string name="create_new_item">Create new item</string>
     <string name="create">Create</string>
     <string name="items">My passwords</string>
+    <string name="edit_item">Edit item</string>
+    <string name="edit">Edit</string>
 </resources>

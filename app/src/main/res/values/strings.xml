@@ -9,4 +9,6 @@
     <string name="create_new_item">Crear nuevo registro</string>
     <string name="create">Crear</string>
     <string name="items">Mis contraseñas</string>
+    <string name="edit_item">Editar registro</string>
+    <string name="edit">Editar</string>
 </resources>
