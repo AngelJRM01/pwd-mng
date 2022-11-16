@@ -52,6 +52,7 @@ public class CreateItemActivity extends AppCompatActivity {
             values.put(ItemContract.ItemEntry.COLUMN_NAME_Link, String.valueOf(textLink.getText()));
             values.put(ItemContract.ItemEntry.COLUMN_NAME_Favorite, (switchFavourite.isChecked()) ? 1 : 0);
             values.put(ItemContract.ItemEntry.COLUMN_NAME_Notes, String.valueOf(textNotes.getText()));
+
             db.insert(ItemContract.ItemEntry.TABLE_NAME, null, values);
 
             Toast.makeText(this, R.string.item_created, Toast.LENGTH_LONG).show();
